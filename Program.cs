@@ -28,6 +28,12 @@ var f06 = versenyzok
     .GroupBy(v => v.Kategoria)
     .OrderBy(g => g.Key)
     .ToDictionary(g => g.Key, g => g.Count());
+var f07 = versenyzok
+    .GroupBy(v => v.Kategoria)
+    .OrderBy(g => g.Key)
+    .ToDictionary(g => g.Key, g => g.Average(
+        v => v.VersenyIdok["I. depó"].TotalMinutes
+        + v.VersenyIdok["II. depó"].TotalMinutes));
 
 /////////////////////////////////////////////////////////////
 
@@ -38,3 +44,5 @@ Console.WriteLine($"atlag elit junior uszas ido: {f04:0.00} perc");
 Console.WriteLine($"elosokent celba ero ferfi: {f05}");
 Console.WriteLine("a versenyt befejezok szama kategoriankent:");
 foreach (var kvp in f06) Console.WriteLine($"\t{kvp.Key,11}: {kvp.Value,2} fo");
+Console.WriteLine("atlag depoban toltott ido kategoriankent:");
+foreach (var kvp in f07) Console.WriteLine($"\t{kvp.Key,11}: {kvp.Value:0.00} perc");
