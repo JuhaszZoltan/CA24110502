@@ -13,28 +13,28 @@ Console.WriteLine($"versenyt befejezok szama: {versenyzok.Count} fo");
 
 /////////////////////////////////////////////////////////////
 
-var f1 = versenyzok.Count(v => v.Kategoria == "elit");
-var f2 = versenyzok
+var f01 = versenyzok.Count(v => v.Kategoria == "elit");
+var f02 = versenyzok
     .Where(v => !v.Nem)
     .Average(v => AKTUALIS_EV - v.SzulEv);
-var f3 = versenyzok.Sum(v => v.VersenyIdok["Kerékpár"].TotalHours);
-var f4 = versenyzok
+var f03 = versenyzok.Sum(v => v.VersenyIdok["Kerékpár"].TotalHours);
+var f04 = versenyzok
     .Where(v => v.Kategoria == "elit junior")
     .Average(v => v.VersenyIdok["Úszás"].TotalMinutes);
-var f5 = versenyzok
+var f05 = versenyzok
     .Where(v => v.Nem)
     .MinBy(v => v.OsszIdo);
-var f6 = versenyzok
+var f06 = versenyzok
     .GroupBy(v => v.Kategoria)
     .OrderBy(g => g.Key)
     .ToDictionary(g => g.Key, g => g.Count());
 
 /////////////////////////////////////////////////////////////
 
-Console.WriteLine($"versenyzok szama elit kategoriaban: {f1} fo");
-Console.WriteLine($"noi versenyzok atlageletkora: {f2:0.00} ev");
-Console.WriteLine($"kerekparozassal toltott osszido: {f3:0.00} ora");
-Console.WriteLine($"atlag elit junior uszas ido: {f4:0.00} perc");
-Console.WriteLine($"elosokent celba ero ferfi: {f5}");
+Console.WriteLine($"versenyzok szama elit kategoriaban: {f01} fo");
+Console.WriteLine($"noi versenyzok atlageletkora: {f02:0.00} ev");
+Console.WriteLine($"kerekparozassal toltott osszido: {f03:0.00} ora");
+Console.WriteLine($"atlag elit junior uszas ido: {f04:0.00} perc");
+Console.WriteLine($"elosokent celba ero ferfi: {f05}");
 Console.WriteLine("a versenyt befejezok szama kategoriankent:");
-foreach (var kvp in f6) Console.WriteLine($"\t{kvp.Key,11}: {kvp.Value,2} fo");
+foreach (var kvp in f06) Console.WriteLine($"\t{kvp.Key,11}: {kvp.Value,2} fo");
